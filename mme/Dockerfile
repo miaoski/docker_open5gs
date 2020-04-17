@@ -34,8 +34,11 @@ EXPOSE 5868/udp
 EXPOSE 5868/tcp
 EXPOSE 5868/sctp
 
-# Expose port 36412
+# Expose S1AP
 EXPOSE 36412/sctp
+
+# Expose S11
+EXPOSE 2123/udp
 
 CMD /mnt/mme/mme_init.sh  && \
     cd install/bin && ./open5gs-mmed
