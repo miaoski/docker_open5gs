@@ -1,0 +1,58 @@
+digraph open5gs_network {
+	graph [label="Open5GS Network Topology"];
+	rankdir=LR;
+
+	eNB [label="eNB\n172.18.0.7"];
+
+	subgraph CN {
+		bgcolor="green";
+		label="Open5GS";
+		HSS	[label="HSS\n172.18.0.2"];
+		MME	[label="MME\n172.18.0.3"];
+		PCRF	[label="PCRF\n172.18.0.6"];
+		PGW	[label="PGW\n172.18.0.5"];
+		SGW	[label="SGW\n172.18.0.4"];
+	}
+	subgraph IMS {
+		bgcolor="blue";
+		label="Kamailio IMS";
+		PCSCF	[label="P-CSCF\n172.18.0.12"];
+		ICSCF	[label="I-CSCF\n172.18.0.13"];
+		SCSCF	[label="S-CSCF\n172.18.0.14"];
+		FHoSS	[label="FHoSS\n172.18.0.15"];
+		RTP	[label="RTPEngine\n172.18.0.18"];
+	}
+
+	MONGO [label="MongoDB"];
+
+	// dashed: for diameter
+	// solid: for TCP & UDP
+
+	HSS -> MME	[label="S6a\n(3868/SCTP)" style="dashed" color="blue"];
+	MME -> HSS	[label="S6a\n(3868/SCTP)" style="dashed" color="blue"];
+	HSS -> MONGO	[label="(27017/TCP)" dir=both];
+	MME -> SGW	[label="S11\n(2123/UDP)" color="red"];
+	MME -> SGSAP	[label="(29118/SCTP)"];
+	SGSAP -> MME	[label="(29118/SCTP)"];
+	PCRF -> PGW	[label="S7\n(3868/SCTP)" style="dashed" color="blue"];
+	PCRF -> PCSCF	[label="Rx\n(3871/SCTP)" style="dashed" color="blue"];
+	PGW -> PCRF	[label="S7\n(3868/SCTP)" style="dashed" color="blue"];
+	PGW -> PCSCF	[label="SGi\n(3871/SCTP)" style="dashed" color="blue"];
+	PGW -> SGW	[label="S5U\n(2152/UDP)" color="green"];
+	SGW -> PGW	[label="S5C\n(2123/UDP)" color="red"];
+	PGW -> SGW	[label="S5C\n(2123/UDP)" color="red"];
+	SGW -> PGW	[label="S5U\n(2152/UDP)" color="green"];
+	SGW -> eNB	[label="S1U\n(2152/UDP)" color="green"];
+	SGW -> MME	[label="S11\n(2123/UDP)" color="red"];
+	eNB -> MME	[label="S1AP\n(36412/SCTP)" color="red"];
+	eNB -> SGW	[label="S1U\n(2152/UDP)" color="green"];
+	MME -> eNB	[label="S1C\n(2123/UDP)" color="red"];
+
+	PCSCF -> PCRF	[label="Rx\n(3868/SCTP)" style="dashed" color="blue"];
+	PCSCF -> FHoSS	[label="(3868/SCTP)" style="dashed" color="blue"];
+	PCSCF -> RTP    [label="RTP (2223/UDP)" color="green"];
+	ICSCF -> FHoSS	[label="(3868/SCTP)" style="dashed" color="blue"];
+	SCSCF -> FHoSS	[label="(3868/SCTP)" style="dashed" color="blue"];
+	FHoSS -> ICSCF	[label="(3869/SCTP)" style="dashed" color="blue"];
+	FHoSS -> SCSCF	[label="(3870/SCTP)" style="dashed" color="blue"];
+}
