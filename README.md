@@ -109,17 +109,34 @@ Thanks to Sukchan Lee's Open5GS, the topology is super similar to [SAE on Wikipe
 ![Network topology of Open5GS + IMS](https://raw.githubusercontent.com/miaoski/docker_open5gs/master/network-topology.png)
 
 
-## SIP REGISTER
+## APN
 
-(Some screenshots)
+APN Configurations in Open5GS should look like this one.
+![APN Configurations](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/open5gs-subscriber.png)
 
+On your cellphone, there should be *internet* and *ims*.
+![APN on cellphone](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/apn-on-cellphone.jpg)
 
-## PCAP
+CoIMS should look like the one below.  If you don't know what CoIMS is, please
+refer to step 23 of VoLTE Setup.
+![CoIMS](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/coims.jpg)
+
+## Networking issues
 
 PCAP files of successful calls can be found on [VoLTE Setup](https://open5gs.org/open5gs/docs/tutorial/02-VoLTE-setup/).
 
-If your cellphone stuck on ipsec (like mine), the PCAP looks like this:
-(Screenshot)
+When DNS is not properly set, you may end up with 478 Unresolvable destination (478/SL):
+![478 unresolvable destination](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/478-unresolvable-destination.png)
+
+If the port if not open, or DNS is not properly configured, the phone cannot
+reach P-CSCF and fails.
+![RST at port 5060](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/RST-5060.png)
+
+If your cellphone stuck on ipsec (like mine), the PCAP looks like the one
+below.  However, it means almost every function in the system works (only
+RTPEngine and FHoSS are not tested.)
+![401 Unauthorized](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/401-unauthorized.png)
+
 
 # Known issues
 
