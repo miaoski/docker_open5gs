@@ -10,10 +10,10 @@ minimum-viable environment before actual study can be proceeded.
 
 ## Important notice before you start
 
-1. @supreeth's "noipv6" hack of Open5GS is used, because my phone isn't able to
+1. Herle Supreeth's "noipv6" hack of Open5GS is used, because my phone isn't able to
    connect to IMS via IPv6.  Even if you choose "IPv4 Only" in APN, Open5GS
    still allocates an IPv6 address to both APN *internet* and *ims*.
-1. @supreeth's fork of Kamailio is used to support ipsec.
+1. Herle Supreeth's fork of Kamailio is used to support IPSec.
 1. Java 7 is downloaded from an alternative location.  You have to agree with
    Oracle's term of service and have an Oracle account, to legally use Java SDK
    7u80.  By using this repo, I assume you have the legal right to use it and
@@ -21,7 +21,7 @@ minimum-viable environment before actual study can be proceeded.
 
 You have to prepare IMSI, Ki, OP (yes, not **OPc**), SQN of your SIM cards.  You
 may want to disable SQN checking in the SIM card.  Check out
-https://github.com/herlesupreeth/pysim for a slightly modified pysim.
+https://github.com/herlesupreeth/sysmo-usim-tool for a slightly modified pysim.
 
 
 ## Prepare SIM cards for VoLTE
@@ -139,9 +139,32 @@ refer to step 23 of VoLTE Setup.
 
 <img src="https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/coims.jpg" width="320" />
 
-## Networking issues
+## Successful PCAPs
 
-PCAP files of successful calls can be found on [VoLTE Setup](https://open5gs.org/open5gs/docs/tutorial/02-VoLTE-setup/).
+PCAP files of successful calls can be found on [VoLTE Setup](https://open5gs.org/open5gs/docs/tutorial/02-VoLTE-setup/) and [Open5GS issue #337](https://github.com/open5gs/open5gs/issues/337).
+
+Herle Supreeth has provided several successful PCAPs, namely,
+- IPSec UE registration for VoLTE
+- Non-IPSec UE registration for VoLTE
+- IPSec UE to IPSec UE calling
+- Non-IPSec UE to IPSec UE calling
+- IPSec UE to Non-IPSec UE calling
+
+### UE registration
+
+![UE registration with IPSec](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/ue-ipsec.png)
+
+From the screenshot, we see a UE that supports IPSec got a response from
+S-CSCF, indicating that ipsec-3gpp is supported, protocol is ESP (ethernet
+proto 50, IPSec).  Client port (port-c) is 5100 and server port (port-s) 6100.
+Refer to [IMS/SIP - Basic Procedures](https://www.sharetechnote.com/html/IMS_SIP_Procedure_Reg_Auth_IPSec.html) if you want to know more.
+Also, notice that packets after 401 Unauthorized are transmitted over ESP.
+
+If a UE does not support IPSec, you don't see the "security-server", as shown below:
+
+![UE registration without IPSec](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/ue-noipsec.png)
+
+## Failed PCAPs
 
 When DNS is not properly set, you may end up with 478 Unresolvable destination (478/SL):
 
@@ -152,7 +175,7 @@ reach P-CSCF and fails.
 
 ![RST at port 5060](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/RST-5060.png)
 
-If your cellphone stuck on ipsec (like mine), the PCAP looks like the one
+If your cellphone stuck on IPSec (like mine), the PCAP looks like the one
 below.  However, it means almost every function in the system works (only
 RTPEngine and FHoSS are not tested.)
 
@@ -177,4 +200,4 @@ using this repo, please submit an issue and let me know!
 
 # License
 
-Derived from @supreeth's repos, therefore BSD 2-Clause.
+Derived from Herle Supreeth's repos, therefore BSD 2-Clause.
