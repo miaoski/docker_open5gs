@@ -24,6 +24,21 @@ may want to disable SQN checking in the SIM card.  Check out
 https://github.com/herlesupreeth/pysim for a slightly modified pysim.
 
 
+## Prepare SIM cards for VoLTE
+
+**N.B.**
+1. Wrong KIC / KID / KIK bricks your SIM card.
+1. Use MCC = 001, MNC = 01 for a testing network, unless you know your MCC/MNC is supported by Android Carrier Privileges.
+
+Refer to: https://osmocom.org/projects/cellular-infrastructure/wiki/VoLTE_IMS_Android_Carrier_Privileges
+- gp --key-enc KIC1 --key-mac KID1 --key-dek KIK1 -lvi
+- gp --key-enc KIC1 --key-mac KID1 --key-dek KIK1 --unlock
+- gp --install applet.cap
+- gp -a 00A4040009A00000015141434C0000 -a 80E2900033F031E22FE11E4F06FFFFFFFFFFFFC114E46872F28B350B7E1F140DE535C2A8D5804F0BE3E30DD00101DB080000000000000001
+- gp --acr-list
+
+If you get some error (invalid instruction) like me, run `gp --acr-list-aram`.
+
 ## Build and Run
 
 * Mandatory requirements:
