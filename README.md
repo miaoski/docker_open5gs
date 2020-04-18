@@ -164,6 +164,36 @@ If a UE does not support IPSec, you don't see the "security-server", as shown be
 
 ![UE registration without IPSec](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/ue-noipsec.png)
 
+
+### VoLTE calls
+
+![ipsec to ipsec call](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/ipsec-to-ipsec%20calls.png)
+
+The Wireshark above shows that after several IPSec (ESP) packets, S-CSCF is
+sending a SIP INVITE for UE 03 to UE 04.  To be more precise,
+
+```
+Request-Line: INVITE sip:0398765432100;phone-context=0498765432100@0498765432100;user=phone SIP/2.0
+...
+Record-Route URI: sip:mo@10.4.128.21:6101;lr=on;ftag=7b3fae13;rm=8;did=078.654
+```
+
+The SIP port of the caller (`contact`) will also be passed to the callee,
+```
+Contact URI: sip:0498765432100@192.168.101.3:6400;alias=192.168.101.3~6401~1
+```
+
+After S-CSCF forwarded the INVITE to P-CSCF, it returns a 100 Trying, and contacts with the callee via IPSec:
+
+![ipsec callee](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/ipsec-to-ipsec%20callee.png)
+
+This can be contrasted when the callee does not support IPSec.  After 100
+Trying, a UE that does not support IPSec is sent a SIP INVITE in clear text:
+
+![non-ipsec callee](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/ipsec-to-noipsec.png)
+
+
+
 ## Failed PCAPs
 
 When DNS is not properly set, you may end up with 478 Unresolvable destination (478/SL):
