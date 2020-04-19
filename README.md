@@ -127,10 +127,6 @@ Thanks to Sukchan Lee's Open5GS, the topology is super similar to [SAE on Wikipe
 
 ## APN
 
-APN Configurations in Open5GS should look like this one.
-
-![APN Configurations](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/open5gs-subscriber.png)
-
 On your cellphone, there should be *internet* and *ims*.
 
 <img src="https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/apn-on-cellphone.jpg" width="320" />
