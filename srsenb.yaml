@@ -12,6 +12,8 @@ services:
       - MME_IP=${MME_IP}
       - ENB_IP=${ENB_IP}
       - DL_EARFCN=${DL_EARFCN}
+      - TX_GAIN=${TX_GAIN}
+      - RX_GAIN=${RX_GAIN}
     networks:
       default:
         ipv4_address: ${ENB_IP}
