@@ -8,6 +8,16 @@ which is mainly contributed by Herle Supreeth.  This repo is also based on his
 The main purpose is to save researchers' and students' time to debug for a
 minimum-viable environment before actual study can be proceeded.
 
+## Proven work on
+
+- OnePlus 6 / Sysmocom USIM-SJS1 / CoIMS (w/o IPSec)
+
+
+If you have a validated working configuration, please submit an issue with
+brand / model / OS / SIM Card / other notable points.  I will add it to the
+list.
+
+
 ## Important notice before you start
 
 1. Herle Supreeth's fork of Kamailio is used to support IPSec.
@@ -215,7 +225,7 @@ RTPEngine and FHoSS are not tested.)
 - If your cellphone mandates IPsec (such as Xiaomi Mi 9 Pro 5G), it might not work.
   However, you should at least see SIP REGISTRATION and a couple of 401 Unauthorized.
 
-I'm currently stuck by IPsec.  If anyone successfully made a VoLTE call by
+I'm currently stuck by IPSec.  If anyone successfully made a VoLTE call with IPSec by
 using this repo, please submit an issue and let me know!
 
 
