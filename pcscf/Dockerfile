@@ -16,12 +16,6 @@ EXPOSE 5100-5109/udp
 EXPOSE 6100-6109/tcp
 EXPOSE 6100-6109/udp
 
-# ipsec client/server
-EXPOSE 5100/udp
-EXPOSE 6100/udp
-EXPOSE 5100/tcp
-EXPOSE 6100/tcp
-
 # Diameter
 EXPOSE 3871/tcp
 EXPOSE 3871/sctp
