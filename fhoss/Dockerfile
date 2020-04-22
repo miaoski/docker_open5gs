@@ -6,7 +6,8 @@ RUN apt-get update && \
 
 WORKDIR /usr/local/src
 COPY jdk-checksum /usr/local/src
-RUN wget https://files-cdn.liferay.com/mirrors/download.oracle.com/otn-pub/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz
+COPY jdk-7u80-linux-x64.tar.gz /usr/local/src
+COPY apache-ant-1.9.14-bin.tar.gz /usr/local/src
 RUN apt-get -y install libdigest-sha-perl
 RUN shasum -c jdk-checksum
 RUN mkdir -p /usr/lib/jvm/ && \
@@ -15,8 +16,7 @@ RUN mkdir -p /usr/lib/jvm/ && \
     update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk1.7.0_80/bin/javac 100
 
 WORKDIR /usr/local
-RUN wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.14-bin.tar.gz
-RUN tar zxf apache-ant-1.9.14-bin.tar.gz && \
+RUN tar zxf /usr/local/src/apache-ant-1.9.14-bin.tar.gz && \
     echo ANT_HOME=/usr/local/  >> /etc/environment && \
     ln -s /usr/local/apache-ant-1.9.14/bin/ant /usr/bin/ant
 

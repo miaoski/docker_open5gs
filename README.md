@@ -56,11 +56,18 @@ Clone the repository and build base docker images of open5gs and Kamailio:
 
 ```
 git clone https://github.com/miaoski/docker_open5gs
+
+# Build Open5GS
 cd docker_open5gs/base
 docker build --no-cache --force-rm -t docker_open5gs .
 
+# Build Kamailio IMS
 cd ../kamailio_base
 docker build --no-cache --force-rm -t open5gs_kamailio .
+
+# Download JDK and ANT
+cd ../fhoss
+./download.sh
 
 cd ..
 docker-compose build --no-cache
