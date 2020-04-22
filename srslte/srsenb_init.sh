@@ -1,7 +1,7 @@
 #!/bin/bash
 
 mkdir -p /etc/srslte
-cp /srsLTE/*.conf /etc/srslte/
+cp /mnt/srsenb/conf/*.conf /etc/srslte/
 
 sed -i 's|MME_IP|'$MME_IP'|g' /etc/srslte/enb.conf
 sed -i 's|ENB_IP|'$ENB_IP'|g' /etc/srslte/enb.conf
