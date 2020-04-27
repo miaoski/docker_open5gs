@@ -89,8 +89,8 @@ def start(tun_ifname,
 		'ip6tables -A INPUT -i ' + tun_ifname + ' -j ACCEPT; fi')
 
 def execute_bash_cmd(bash_cmd):
-	#print("Executing: /bin/bash -c " + bash_cmd)
-	return subprocess.run(bash_cmd, stdout=subprocess.PIPE, shell=True)
+	print("Executing: /bin/bash -c " + bash_cmd)
+	#return subprocess.run(bash_cmd, stdout=subprocess.PIPE, shell=True)
 
 if __name__ == '__main__':
 	start()
