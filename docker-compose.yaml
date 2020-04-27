@@ -65,12 +65,20 @@ services:
     volumes:
       - ./pgw:/mnt/pgw
       - ./log:/open5gs/install/var/log/open5gs
+    ports:
+      - "5060:5060/tcp"
+      - "5060:5060/udp"
     environment:
       - PCRF_IP=${PCRF_IP}
       - DNS_IP=${DNS_IP}
       - PCSCF_IP=${PCSCF_IP}
+      - MYSQL_IP=${MYSQL_IP}
+      - RTPENGINE_IP=${RTPENGINE_IP}
     depends_on:
       - dns
+      - mysql
+      - pcrf
+      - rtpengine
     dns: ${DNS_IP}
     cap_add:
       - NET_ADMIN
@@ -144,29 +152,6 @@ services:
     networks:
       default:
         ipv4_address: ${RTPENGINE_IP}
-  pcscf:
-    build: ./pcscf
-    image: docker_open5gs_pcscf
-    container_name: pcscf
-    privileged: true
-    volumes:
-      - ./pcscf:/mnt/pcscf
-    depends_on:
-      - dns
-      - mysql
-      - pcrf
-      - rtpengine
-    environment:
-      - MYSQL_IP=${MYSQL_IP}
-      - PCSCF_IP=${PCSCF_IP}
-      - RTPENGINE_IP=${RTPENGINE_IP}
-    dns: ${DNS_IP}
-    ports:
-      - "5060:5060/tcp"
-      - "5060:5060/udp"
-    networks:
-      default:
-        ipv4_address: ${PCSCF_IP}
   icscf:
     build: ./icscf
     image: docker_open5gs_icscf

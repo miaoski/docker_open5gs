@@ -1,4 +1,4 @@
-FROM open5gs_kamailio
+FROM docker_open5gs
 
 ADD kamailio_icscf /etc/kamailio_icscf/
 

@@ -40,5 +40,4 @@ EXPOSE 36412/sctp
 # Expose S11
 EXPOSE 2123/udp
 
-CMD /mnt/mme/mme_init.sh  && \
-    cd install/bin && ./open5gs-mmed
+CMD /mnt/mme/mme_init.sh

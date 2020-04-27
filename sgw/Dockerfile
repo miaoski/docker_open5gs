@@ -32,5 +32,4 @@ EXPOSE 2152/udp
 # Expose port 2123
 EXPOSE 2123/udp
 
-CMD /mnt/sgw/sgw_init.sh  && \
-    cd install/bin && ./open5gs-sgwd
+CMD /mnt/sgw/sgw_init.sh

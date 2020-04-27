@@ -1,4 +1,4 @@
-FROM open5gs_kamailio
+FROM docker_open5gs
 
 EXPOSE 3306/tcp
 

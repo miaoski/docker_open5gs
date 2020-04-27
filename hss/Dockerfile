@@ -37,5 +37,4 @@ EXPOSE 5868/sctp
 # Expose port 3000 Web UI of HSS
 EXPOSE 3000/tcp
 
-CMD /mnt/hss/hss_init.sh  && \
-    cd install/bin && sleep 5 && ./open5gs-hssd
+CMD /mnt/hss/hss_init.sh

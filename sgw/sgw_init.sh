@@ -28,7 +28,8 @@
 
 export IF_NAME=$(ip r | awk '/default/ { print $5 }')
 
-cp /mnt/sgw/sgw.yaml install/etc/open5gs
-sed -i 's|SGW_IF|'$IF_NAME'|g' install/etc/open5gs/sgw.yaml
+CONF=/open5gs/install/etc/open5gs/sgw.yaml
+cp /mnt/sgw/sgw.yaml ${CONF}
+sed -i 's|SGW_IF|'$IF_NAME'|g' ${CONF}
 
-
+/open5gs/install/bin/open5gs-sgwd

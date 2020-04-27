@@ -1,29 +1,3 @@
-# BSD 2-Clause License
-
-# Copyright (c) 2019, Supreeth Herle
-# All rights reserved.
-
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-
-# 1. Redistributions of source code must retain the above copyright notice, this
-#    list of conditions and the following disclaimer.
-
-# 2. Redistributions in binary form must reproduce the above copyright notice,
-#    this list of conditions and the following disclaimer in the documentation
-#    and/or other materials provided with the distribution.
-
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-# DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-# FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-# DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-# SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-# CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-# OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-# OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
 FROM docker_open5gs
 
 # Expose port 3868 for Diameter queries
@@ -34,11 +8,30 @@ EXPOSE 5868/udp
 EXPOSE 5868/tcp
 EXPOSE 5868/sctp
 
-# Expose port 2152
+# S5/S8
 EXPOSE 2152/udp
-
-# Expose port 2123
 EXPOSE 2123/udp
 
-CMD /mnt/pgw/pgw_init.sh  && \
-    cd install/bin && ./open5gs-pgwd
+# ims_ipsec_pcscf listens to ports 5060-5064
+EXPOSE 5060/tcp
+EXPOSE 5060/udp
+EXPOSE 5062/tcp
+EXPOSE 5062/udp
+EXPOSE 5063/tcp
+EXPOSE 5063/udp
+
+# ipsec client/server
+EXPOSE 5100-5109/tcp
+EXPOSE 5100-5109/udp
+EXPOSE 6100-6109/tcp
+EXPOSE 6100-6109/udp
+
+# Diameter
+EXPOSE 3871/tcp
+EXPOSE 3871/sctp
+
+ADD kamailio_pcscf /etc/kamailio_pcscf/
+COPY ./init.d/kamailio_pcscf /etc/init.d/kamailio_pcscf
+COPY ./default/kamailio_pcscf /etc/default/kamailio_pcscf
+
+CMD /mnt/pgw/pgw_pcscf_init.sh

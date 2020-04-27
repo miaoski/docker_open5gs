@@ -29,10 +29,16 @@
 export IP_ADDR=$(awk 'END{print $1}' /etc/hosts)
 export IF_NAME=$(ip r | awk '/default/ { print $5 }')
 
-cp /mnt/mme/mme.yaml install/etc/open5gs
-sed -i 's|MME_IP|'$IP_ADDR'|g' install/etc/open5gs/mme.yaml
-sed -i 's|MME_IF|'$IF_NAME'|g' install/etc/open5gs/mme.yaml
-sed -i 's|HSS_IP|'$HSS_IP'|g' install/etc/open5gs/mme.yaml
-sed -i 's|SGW_IP|'$SGW_IP'|g' install/etc/open5gs/mme.yaml
-sed -i 's|PGW_IP|'$PGW_IP'|g' install/etc/open5gs/mme.yaml
+CONF=/open5gs/install/etc/open5gs/mme.yaml
 
+cp /mnt/mme/mme.yaml ${CONF}
+sed -i 's|MME_IP|'$IP_ADDR'|g' ${CONF}
+sed -i 's|MME_IF|'$IF_NAME'|g' ${CONF}
+sed -i 's|HSS_IP|'$HSS_IP'|g' ${CONF}
+sed -i 's|SGW_IP|'$SGW_IP'|g' ${CONF}
+sed -i 's|PGW_IP|'$PGW_IP'|g' ${CONF}
+
+while true; do
+    /open5gs/install/bin/open5gs-mmed
+    sleep 3
+done

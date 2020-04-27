@@ -28,10 +28,14 @@
 
 export IP_ADDR=$(awk 'END{print $1}' /etc/hosts)
 
-cp /mnt/pcrf/pcrf.yaml install/etc/open5gs
-sed -i 's|MONGO_IP|'$MONGO_IP'|g' install/etc/open5gs/pcrf.yaml
-sed -i 's|NAME|'$NAME'|g' install/etc/open5gs/pcrf.yaml
-sed -i 's|REALM|'$REALM'|g' install/etc/open5gs/pcrf.yaml
-sed -i 's|PCRF_IP|'$IP_ADDR'|g' install/etc/open5gs/pcrf.yaml
-sed -i 's|PGW_IP|'$PGW_IP'|g' install/etc/open5gs/pcrf.yaml
-sed -i 's|PCSCF_IP|'$PCSCF_IP'|g' install/etc/open5gs/pcrf.yaml
+CONF=/open5gs/install/etc/open5gs/pcrf.yaml
+cp /mnt/pcrf/pcrf.yaml ${CONF}
+sed -i 's|MONGO_IP|'$MONGO_IP'|g' ${CONF}
+sed -i 's|NAME|'$NAME'|g' ${CONF}
+sed -i 's|REALM|'$REALM'|g' ${CONF}
+sed -i 's|PCRF_IP|'$IP_ADDR'|g' ${CONF}
+sed -i 's|PGW_IP|'$PGW_IP'|g' ${CONF}
+sed -i 's|PCSCF_IP|'$PCSCF_IP'|g' ${CONF}
+
+sleep 10
+/open5gs/install/bin/open5gs-pcrfd
