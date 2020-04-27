@@ -11,7 +11,7 @@ minimum-viable environment before actual study can be proceeded.
 ## Proven work on
 
 - OnePlus 6 / Sysmocom USIM-SJS1 / CoIMS (w/o IPSec)
-
+- Mi 9 Pro 5G / Sysmocom USIM-SJS1 / CoIMS (w/ IPSec)
 
 If you have a validated working configuration, please submit an issue with
 brand / model / OS / SIM Card / other notable points.  I will add it to the
@@ -226,14 +226,16 @@ RTPEngine and FHoSS are not tested.)
 ![401 Unauthorized](https://raw.githubusercontent.com/miaoski/docker_open5gs/gh-pages/screenshots/401-unauthorized.png)
 
 
+
+## IPsec
+
+To debug IPsec, run `ip xfrm monitor` on P-CSCF.  You should see states and
+policies change when a UE is being registered.
+
+
 # Known issues
 
 - IPv6 is not supported.
-- If your cellphone mandates IPsec (such as Xiaomi Mi 9 Pro 5G), it might not work.
-  However, you should at least see SIP REGISTRATION and a couple of 401 Unauthorized.
-
-I'm currently stuck by IPSec.  If anyone successfully made a VoLTE call with IPSec by
-using this repo, please submit an issue and let me know!
 
 
 # References
