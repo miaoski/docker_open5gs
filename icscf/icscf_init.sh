@@ -6,6 +6,12 @@ while true; do
 	sleep 1
 done
 
+while true; do
+	echo 'Waiting for FHoSS to start.'
+	echo '' | nc -w 1 $FHOSS_IP 3868 && break
+	sleep 1
+done
+
 sed -i 's|ICSCF_IP|'$ICSCF_IP'|g' /etc/kamailio_icscf/kamailio_icscf.cfg
 sed -i 's|ICSCF_IP|'$ICSCF_IP'|g' /etc/kamailio_icscf/icscf.cfg
 sed -i 's|MYSQL_IP|'$MYSQL_IP'|g' /etc/kamailio_icscf/icscf.cfg

@@ -180,6 +180,7 @@ services:
     environment:
       - MYSQL_IP=${MYSQL_IP}
       - ICSCF_IP=${ICSCF_IP}
+      - FHOSS_IP=${FHOSS_IP}
     dns: ${DNS_IP}
     ports:
       - "4060:4060/tcp"
@@ -199,6 +200,7 @@ services:
     environment:
       - MYSQL_IP=${MYSQL_IP}
       - SCSCF_IP=${SCSCF_IP}
+      - FHOSS_IP=${FHOSS_IP}
     dns: ${DNS_IP}
     ports:
       - "6060:6060/tcp"
