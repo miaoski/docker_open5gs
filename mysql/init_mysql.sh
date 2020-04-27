@@ -2,6 +2,7 @@
 cp /mnt/mysql/mysqld.cnf /etc/mysql/mysql.conf.d/
 
 rm -f /var/run/mysqld/mysqld.sock
+chown -R mysql:mysql /var/lib/mysql
 
 if [ ! -e /var/lib/mysql/ibdata1 ]; then
 	echo 'Initialize MySQL DB'
@@ -54,6 +55,7 @@ if [ ! -f /var/lib/mysql/kamailio.sem ]; then
 	:> /var/lib/mysql/kamailio.sem
 fi
 
+chown -R mysql:mysql /var/lib/mysql
 echo 'MySQL is running.'
 while true; do
 	sleep 1
