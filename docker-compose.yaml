@@ -160,6 +160,7 @@ services:
       - MYSQL_IP=${MYSQL_IP}
       - PCSCF_IP=${PCSCF_IP}
       - RTPENGINE_IP=${RTPENGINE_IP}
+      - PGW_IP=${PGW_IP}
     dns: ${DNS_IP}
     ports:
       - "5060:5060/tcp"
