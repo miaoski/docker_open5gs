@@ -12,6 +12,7 @@ minimum-viable environment before actual study can be proceeded.
 
 - OnePlus 6 / Sysmocom USIM-SJS1 / CoIMS (w/o IPSec)
 - Mi 9 Pro 5G / Sysmocom USIM-SJS1 / CoIMS (w/ IPSec)
+- Zenfone 3 / Sysmocom USIM-SJS1 / Native VoLTE IPsec
 
 If you have a validated working configuration, please submit an issue with
 brand / model / OS / SIM Card / other notable points.  I will add it to the
