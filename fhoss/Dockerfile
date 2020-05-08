@@ -5,9 +5,9 @@ RUN apt-get update && \
     apt-get -y install curl net-tools iputils-ping wget subversion
 
 WORKDIR /usr/local/src
+RUN wget https://files-cdn.liferay.com/mirrors/download.oracle.com/otn-pub/java/jdk/7u80-b15/jdk-7u80-linux-x64.tar.gz
+RUN wget http://archive.apache.org/dist/ant/binaries/apache-ant-1.9.14-bin.tar.gz
 COPY jdk-checksum /usr/local/src
-COPY jdk-7u80-linux-x64.tar.gz /usr/local/src
-COPY apache-ant-1.9.14-bin.tar.gz /usr/local/src
 RUN apt-get -y install libdigest-sha-perl
 RUN shasum -c jdk-checksum
 RUN mkdir -p /usr/lib/jvm/ && \
