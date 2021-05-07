@@ -1,3 +1,8 @@
+# Deprecated
+
+@herlesupreeth has updated his original repo https://github.com/herlesupreeth/docker_open5gs and uses the latest Open5GS components.
+This cloned repo is therefore deprecated.
+
 # docker_open5gs with IMS
 
 This repository is meant to be a install-and-run lab for Open5GS + Kamailio IMS
